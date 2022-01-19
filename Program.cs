@@ -19,7 +19,6 @@ namespace Physcs
     {
         public void window()
         {
-            int BodyCount;
             //creating list of objects
             List<gravity.Nbody> Body = new List<gravity.Nbody>();
             //window iniztialization
@@ -33,7 +32,6 @@ namespace Physcs
             {
                 Body.Add(new gravity.Nbody(random.Next((int)windowwidth), random.Next((int)windowheight)));
             }
-            BodyCount = Body.Count;
             //main loop for window 
             while (window.IsOpen)
             {
@@ -47,8 +45,11 @@ namespace Physcs
                 {
                     for (int x = 0; x < Body.Count; x++)
                     {
-                        Body[i].xmovement(BodyCount, Body[x]);
-                        Body[i].ymovement(BodyCount, Body[x]);
+                        if (i != x)
+                        {
+                            Body[i].xmovement(Body[x]);
+                            Body[i].ymovement(Body[x]);
+                        }
                     }
                     window.Draw(Body[i].returngrad());
                 }
