@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "zcJtk1m/0HorQxrGkVC0ZOf/VH9a9lGiHiLetQS2XpVvyaWSTacTwpF6DNI+os1zKLLGxn04tuQMmu9PI3W/hQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\hachk\\Documents\\Physics\\Physics Engine\\Physcs.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hachk\\.nuget\\packages\\csfml\\2.5.0\\csfml.2.5.0.nupkg.sha512",
+    "C:\\Users\\hachk\\.nuget\\packages\\sfml.audio\\2.5.0\\sfml.audio.2.5.0.nupkg.sha512",
+    "C:\\Users\\hachk\\.nuget\\packages\\sfml.graphics\\2.5.0\\sfml.graphics.2.5.0.nupkg.sha512",
+    "C:\\Users\\hachk\\.nuget\\packages\\sfml.net\\2.5.0\\sfml.net.2.5.0.nupkg.sha512",
+    "C:\\Users\\hachk\\.nuget\\packages\\sfml.system\\2.5.0\\sfml.system.2.5.0.nupkg.sha512",
+    "C:\\Users\\hachk\\.nuget\\packages\\sfml.window\\2.5.0\\sfml.window.2.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
