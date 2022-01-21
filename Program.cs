@@ -22,15 +22,15 @@ namespace Physcs
             //creating list of objects
             List<gravity.Nbody> Body = new List<gravity.Nbody>();
             //window iniztialization
-            uint windowheight = 800;
-            uint windowwidth = 1000;
+            uint windowheight = 2000;
+            uint windowwidth = 2000;
             VideoMode mode = new VideoMode(windowwidth, windowheight);
             RenderWindow window = new RenderWindow(mode, "Main");
             Random random = new Random();
             //assigning objects to list
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 50; i++)
             {
-                Body.Add(new gravity.Nbody(random.Next((int)windowwidth), random.Next((int)windowheight)));
+                Body.Add(new gravity.Nbody(random.Next((int)windowwidth/3,(int)windowwidth - (int)windowheight/3), random.Next((int)windowheight/3,(int)windowheight - (int)windowheight/3)));
             }
             //main loop for window 
             while (window.IsOpen)
@@ -47,10 +47,15 @@ namespace Physcs
                     {
                         if (i != x)
                         {
-                            Body[i].xmovement(Body[x]);
-                            Body[i].ymovement(Body[x]);
+                            Body[i].xmovement(Body[x].Currentx, Body[x].Currenty);
+                            Body[i].ymovement(Body[x].Currentx, Body[x].Currenty);
+                            Console.WriteLine("yo");
                         }
                     }
+                }
+                for (int i = 0; i < Body.Count; i++)
+                {
+                    Body[i].LocationCalc();
                     window.Draw(Body[i].returngrad());
                 }
                 window.Display();
