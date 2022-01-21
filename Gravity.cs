@@ -18,18 +18,19 @@ namespace gravity
         public float Currenty;
         double Ay;
         double Ax;
+        float dimensions;
         public Nbody(int xlocation, int ylocation)
         {
-            float dimensions = random.Next(5);
+            dimensions = random.Next(10,20);
             circle = new CircleShape(dimensions, 30);
-            circle.FillColor = Color.White;
+            circle.FillColor = Color.Green;
             circle.Origin = new Vector2f(dimensions/2, dimensions/2);
             circle.Position = new Vector2f(xlocation, ylocation);
             Currentx = xlocation;
             Currenty = ylocation;
-            xvelocity = random.Next(-30,30);
-            yvelocity = random.Next(-30,30);
-            mass = 10;
+            xvelocity = random.Next(-10,10);
+            yvelocity = random.Next(-10,10);
+            mass = 5;
             //double fieldStrength = (Gconst*mass*M2);
         }
 

@@ -24,13 +24,18 @@ namespace Physcs
             //window iniztialization
             uint windowheight = 2000;
             uint windowwidth = 2000;
+            double windowWidthrangelower = windowwidth*0.30;
+            double windowWidthrangehigher = windowwidth*0.60;
+            double windowHeightrangelower = windowheight*0.30;
+            double windowHieghtrangehigher = windowheight*0.60;
+
             VideoMode mode = new VideoMode(windowwidth, windowheight);
             RenderWindow window = new RenderWindow(mode, "Main");
             Random random = new Random();
             //assigning objects to list
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 100; i++)
             {
-                Body.Add(new gravity.Nbody(random.Next((int)windowwidth/3,(int)windowwidth - (int)windowheight/3), random.Next((int)windowheight/3,(int)windowheight - (int)windowheight/3)));
+                Body.Add(new gravity.Nbody(random.Next((int)windowWidthrangelower, (int)windowWidthrangehigher), random.Next((int)windowHeightrangelower, (int)windowHieghtrangehigher)));
             }
             //main loop for window 
             while (window.IsOpen)
