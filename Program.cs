@@ -49,7 +49,6 @@ namespace Physcs
                         {
                             Body[i].xmovement(Body[x].Currentx, Body[x].Currenty);
                             Body[i].ymovement(Body[x].Currentx, Body[x].Currenty);
-                            Console.WriteLine("yo");
                         }
                     }
                 }
