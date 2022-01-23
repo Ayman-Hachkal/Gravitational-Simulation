@@ -40,6 +40,11 @@ namespace gravity
             double distancex = Math.Abs(Currentx - Outerx); 
             double distance =  Math.Sqrt(Math.Pow(distancex,2) + Math.Pow(distancey,2));
             Ax += -mass*(Currentx-Outerx)/Math.Pow(distance,3);
+            if (Currentx - >= Outerx +)
+            {
+                Ax = 0;
+                xvelocity = 0;
+            }
             //xvelocity += time*Ax;
             //Currentx += (float)time*(float)xvelocity;
 

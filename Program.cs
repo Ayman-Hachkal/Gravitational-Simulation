@@ -22,8 +22,8 @@ namespace Physcs
             //creating list of objects
             List<gravity.Nbody> Body = new List<gravity.Nbody>();
             //window iniztialization
-            uint windowheight = 2000;
-            uint windowwidth = 2000;
+            uint windowheight = 1080;
+            uint windowwidth = 1920;
             double windowWidthrangelower = windowwidth*0.30;
             double windowWidthrangehigher = windowwidth*0.60;
             double windowHeightrangelower = windowheight*0.30;
