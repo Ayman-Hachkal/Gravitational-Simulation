@@ -10,7 +10,7 @@ namespace gravity
         private Random random = new Random();
         double Gconst = 6.673889 * Math.Pow(10, -11);
         CircleShape circle;
-        double time = 0.1;
+        double time = 0.5;
         double mass;
         double xvelocity;
         double yvelocity;
@@ -19,6 +19,8 @@ namespace gravity
         double Ay;
         double Ax;
         float dimensions;
+        List<float> prevlocX = new List<float> {};
+        List<float> prevlocY = new List<float> {};
         public Nbody(int xlocation, int ylocation)
         {
             dimensions = random.Next(10,20);
@@ -28,8 +30,8 @@ namespace gravity
             circle.Position = new Vector2f(xlocation, ylocation);
             Currentx = xlocation;
             Currenty = ylocation;
-            xvelocity = random.Next(-10,10);
-            yvelocity = random.Next(-10,10);
+            xvelocity = 0;//random.Next(-10,10);
+            yvelocity = 0;//random.Next(-10,10);
             mass = 5;
             //double fieldStrength = (Gconst*mass*M2);
         }
@@ -74,8 +76,24 @@ namespace gravity
         {
             return circle;
         }
+        public void trail(float locationX, float locationY)
+        {
+            if (prevlocX.Count < 100)
+            {
+                prevlocX.Add(locationX);
+                prevlocY.Add(locationY);
+            }
+            else
+            {
+                prevlocX.RemoveAt(0);
+                prevlocY.RemoveAt(0);
+                for (int i = 1; i < prevlocX.Count; i++)
+                {
+                    prevlocX[i -1] = prevlocX[i];
+                }
 
+
+            }
+        }
     }
-
-
 }

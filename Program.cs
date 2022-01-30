@@ -3,6 +3,7 @@ using SFML.Window;
 using SFML.System;
 using SFML.Graphics;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using gravity;
 
 namespace Physcs
@@ -62,6 +63,7 @@ namespace Physcs
                     Body[i].LocationCalc();
                     window.Draw(Body[i].returngrad());
                 }
+                if ()
                 window.Display();
                 window.SetFramerateLimit(60);
                 Clock clock = new Clock();
