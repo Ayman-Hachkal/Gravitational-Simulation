@@ -62,8 +62,10 @@ namespace Physcs
                 {
                     Body[i].LocationCalc();
                     window.Draw(Body[i].returngrad());
+                    Body[i].trail();
+                    Body[i].drawTrail(window);
                 }
-                if ()
+                
                 window.Display();
                 window.SetFramerateLimit(60);
                 Clock clock = new Clock();

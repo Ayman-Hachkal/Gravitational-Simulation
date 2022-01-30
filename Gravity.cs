@@ -10,7 +10,7 @@ namespace gravity
         private Random random = new Random();
         double Gconst = 6.673889 * Math.Pow(10, -11);
         CircleShape circle;
-        double time = 0.5;
+        double time = 0.01;
         double mass;
         double xvelocity;
         double yvelocity;
@@ -24,7 +24,7 @@ namespace gravity
         public Nbody(int xlocation, int ylocation)
         {
             dimensions = random.Next(10,20);
-            circle = new CircleShape(dimensions, 30);
+            circle = new CircleShape(dimensions, 1000);
             circle.FillColor = Color.Green;
             circle.Origin = new Vector2f(dimensions/2, dimensions/2);
             circle.Position = new Vector2f(xlocation, ylocation);
@@ -32,7 +32,7 @@ namespace gravity
             Currenty = ylocation;
             xvelocity = 0;//random.Next(-10,10);
             yvelocity = 0;//random.Next(-10,10);
-            mass = 5;
+            mass = 20;
             //double fieldStrength = (Gconst*mass*M2);
         }
 
@@ -42,11 +42,11 @@ namespace gravity
             double distancex = Math.Abs(Currentx - Outerx); 
             double distance =  Math.Sqrt(Math.Pow(distancex,2) + Math.Pow(distancey,2));
             Ax += -mass*(Currentx-Outerx)/Math.Pow(distance,3);
-            if (Currentx - >= Outerx +)
-            {
-                Ax = 0;
-                xvelocity = 0;
-            }
+            //if (Currentx >= Outerx +)
+            //{
+            //    Ax = 0;
+            //    xvelocity = 0;
+            //}
             //xvelocity += time*Ax;
             //Currentx += (float)time*(float)xvelocity;
 
@@ -68,7 +68,6 @@ namespace gravity
             Currentx += (float)time*(float)xvelocity;
             yvelocity += time*Ay;
             Currenty += (float)time*(float)yvelocity;
-
             circle.Position = new Vector2f(Currentx, Currenty);
 
         }
@@ -76,12 +75,12 @@ namespace gravity
         {
             return circle;
         }
-        public void trail(float locationX, float locationY)
+        public void trail()
         {
             if (prevlocX.Count < 100)
             {
-                prevlocX.Add(locationX);
-                prevlocY.Add(locationY);
+                prevlocX.Add(Currentx);
+                prevlocY.Add(Currenty);
             }
             else
             {
@@ -89,10 +88,27 @@ namespace gravity
                 prevlocY.RemoveAt(0);
                 for (int i = 1; i < prevlocX.Count; i++)
                 {
-                    prevlocX[i -1] = prevlocX[i];
+                    prevlocX[i-1] = prevlocX[i];
+                    prevlocY[i-1] = prevlocY[i];
                 }
+                prevlocX.RemoveAt(prevlocX.Count - 1);
+                prevlocY.RemoveAt(prevlocY.Count - 1);
+                prevlocX.Add(Currentx);
+                prevlocY.Add(Currenty);
 
 
+            }
+        }
+        public void drawTrail(RenderWindow window)
+        {
+            for (int i = 0; i < prevlocX.Count; i++)
+            {
+                CircleShape point;
+                point = new CircleShape(1, 1000);
+                point.FillColor = Color.Green;
+                point.Origin = new Vector2f(3/2, 3/2);
+                point.Position = new Vector2f(prevlocX[i], prevlocY[i]);
+                window.Draw(point);
             }
         }
     }
