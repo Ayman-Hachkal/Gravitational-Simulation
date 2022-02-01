@@ -38,58 +38,91 @@ namespace Physcs
             view.Zoom(1f);
             window.SetView(view);
 
-            //assigning objects to list
+            //Assigning objects to list
             for (int i = 0; i < 5; i++)
             {
                 Body.Add(new gravity.Nbody(random.Next((int)windowWidthrangelower, (int)windowWidthrangehigher), random.Next((int)windowHeightrangelower, (int)windowHieghtrangehigher)));
             }
-            //main loop for window 
+            //Gets length of object list body and adds one to set as NULL
+            int currentlockedsystem = Body.Count + 1;
+            //Main loop for window 
             while (window.IsOpen)
             {
-                //if close button is pressed close the window
+                //Checks if the X button is pressed to close
                 window.DispatchEvents();
                 window.Closed += (s, a) => window.Close();
+                //Checks different keypresses
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
                 {
+                    //Zooms in if up arrow is pressed
                     view.Zoom(1.05f);
                     window.SetView(view);
                 }
                 else if (Keyboard.IsKeyPressed(Keyboard.Key.Down))
                 {
+                    //Zooms out if down arrow is pressed
                     view.Zoom(0.95f);
                     window.SetView(view);
                 }
                 else if (Keyboard.IsKeyPressed(Keyboard.Key.W))
                 {
+                    //Camera moves upwards if W is pressed
                     Vector2f dim = view.Center;
-                    dim.Y = dim.Y - 10;
+                    dim.Y = dim.Y - 20;
                     view.Center = dim;
                     window.SetView(view);
                 }
                 else if (Keyboard.IsKeyPressed(Keyboard.Key.S))
                 {
+                    //Camera moves downwards if S is pressed
                     Vector2f dim = view.Center;
-                    dim.Y = dim.Y + 10;
+                    dim.Y = dim.Y + 20;
                     view.Center = dim;
                     window.SetView(view);
                 }
                 else if (Keyboard.IsKeyPressed(Keyboard.Key.A))
                 {
+                    //Camera moves left if A is pressed
                     Vector2f dim = view.Center;
-                    dim.X = dim.X - 10;
+                    dim.X = dim.X - 20;
                     view.Center = dim;
                     window.SetView(view);
                 }
                 else if (Keyboard.IsKeyPressed(Keyboard.Key.D))
                 {
+                    //Camera moves right is D is pressed
                     Vector2f dim = view.Center;
-                    dim.X = dim.X + 10;
+                    dim.X = dim.X + 20;
                     view.Center = dim;
                     window.SetView(view);
                 }
-
-
-                
+                //Picks which body camera locks onto
+                else if(Keyboard.IsKeyPressed(Keyboard.Key.Right))
+                {
+                    //resets pointer on list to 0 as a circular movement
+                    if(currentlockedsystem == Body.Count + 1)
+                    {
+                        currentlockedsystem = 0;
+                    }
+                    else
+                    {
+                        //Moves pointer to the right
+                        currentlockedsystem += 1;
+                    }
+                    Console.WriteLine(currentlockedsystem);
+                }
+                else if(Keyboard.IsKeyPressed(Keyboard.Key.Left))
+                {
+                    if(currentlockedsystem == 0)
+                    {
+                        currentlockedsystem = Body.Count + 1;
+                    }
+                    else
+                    {
+                        currentlockedsystem -= 1;
+                    }
+                    Console.WriteLine(currentlockedsystem);
+                }
                 //clears window and sets background as black
                 window.Clear(Color.Black);
                 for (int i = 0; i < Body.Count; i++)
@@ -104,7 +137,6 @@ namespace Physcs
                     }
                 }
 
-                
                 for (int i = 0; i < Body.Count; i++)
                 {
                     Body[i].LocationCalc();

@@ -41,7 +41,7 @@ namespace gravity
             double distancey = Math.Abs(Currenty - Outery); 
             double distancex = Math.Abs(Currentx - Outerx); 
             double distance =  Math.Sqrt(Math.Pow(distancex,2) + Math.Pow(distancey,2));
-            Ax += -mass*(Currentx-Outerx)/Math.Pow(distance,3);
+            Ax += -mass*(Currentx-Outerx)/Math.Pow(distance,2);
             //if (Currentx >= Outerx +)
             //{
             //    Ax = 0;
@@ -57,7 +57,7 @@ namespace gravity
             double distancey = Math.Abs(Currenty - Outery); 
             double distancex = Math.Abs(Currentx - Outerx); 
             double distance =  Math.Sqrt(Math.Pow(distancex,2) + Math.Pow(distancey,2));
-            Ay += -mass*(Currenty-Outery)/Math.Pow(distance,3);
+            Ay += -mass*(Currenty-Outery)/Math.Pow(distance,2);
 
             //yvelocity += time*Ay;
             //Currenty += (float)time*(float)yvelocity;
