@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "ijM1P9EO6IjvorrOQhUhPwiLGj9JO3moo4Qn08pFnFTL33GCd4KQDb1ssNXxOGcDm/0M0xnxvKuz/E+i6gykRg==",
+  "dgSpecHash": "EZERngayZMfzwu6EU0TSiB7X4euIij1HQPahNcD0E6WyxkZhXOR5dtQV9rEQp/EXGTXoaNDgQwVJPbhB5ivKKg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ayman\\Documents\\Physcs\\Physcs.csproj",
+  "projectFilePath": "C:\\Users\\hachk\\Documents\\conway's game of life\\Physcs\\Physcs.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Ayman\\.nuget\\packages\\csfml\\2.5.0\\csfml.2.5.0.nupkg.sha512",
-    "C:\\Users\\Ayman\\.nuget\\packages\\sfml.audio\\2.5.0\\sfml.audio.2.5.0.nupkg.sha512",
-    "C:\\Users\\Ayman\\.nuget\\packages\\sfml.graphics\\2.5.0\\sfml.graphics.2.5.0.nupkg.sha512",
-    "C:\\Users\\Ayman\\.nuget\\packages\\sfml.net\\2.5.0\\sfml.net.2.5.0.nupkg.sha512",
-    "C:\\Users\\Ayman\\.nuget\\packages\\sfml.system\\2.5.0\\sfml.system.2.5.0.nupkg.sha512",
-    "C:\\Users\\Ayman\\.nuget\\packages\\sfml.window\\2.5.0\\sfml.window.2.5.0.nupkg.sha512"
+    "C:\\Users\\hachk\\.nuget\\packages\\csfml\\2.5.0\\csfml.2.5.0.nupkg.sha512",
+    "C:\\Users\\hachk\\.nuget\\packages\\sfml.audio\\2.5.0\\sfml.audio.2.5.0.nupkg.sha512",
+    "C:\\Users\\hachk\\.nuget\\packages\\sfml.graphics\\2.5.0\\sfml.graphics.2.5.0.nupkg.sha512",
+    "C:\\Users\\hachk\\.nuget\\packages\\sfml.net\\2.5.0\\sfml.net.2.5.0.nupkg.sha512",
+    "C:\\Users\\hachk\\.nuget\\packages\\sfml.system\\2.5.0\\sfml.system.2.5.0.nupkg.sha512",
+    "C:\\Users\\hachk\\.nuget\\packages\\sfml.window\\2.5.0\\sfml.window.2.5.0.nupkg.sha512"
   ],
   "logs": []
 }
