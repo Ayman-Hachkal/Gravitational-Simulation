@@ -10,7 +10,7 @@ namespace gravity
         private Random random = new Random();
         double Gconst = 6.673889 * Math.Pow(10, -11);
         CircleShape circle;
-        double time = 0.01;
+        double time = 0.1;
         double mass;
         double xvelocity;
         double yvelocity;
@@ -30,9 +30,9 @@ namespace gravity
             circle.Position = new Vector2f(xlocation, ylocation);
             Currentx = xlocation;
             Currenty = ylocation;
-            xvelocity = 0;//random.Next(-10,10);
-            yvelocity = 0;//random.Next(-10,10);
-            mass = 20;
+            xvelocity = random.Next(-10,10);
+            yvelocity = random.Next(-10,10);
+            mass = random.Next(10,100);
             //double fieldStrength = (Gconst*mass*M2);
         }
 
@@ -58,6 +58,7 @@ namespace gravity
             double distancex = Math.Abs(Currentx - Outerx); 
             double distance =  Math.Sqrt(Math.Pow(distancex,2) + Math.Pow(distancey,2));
             Ay += -mass*(Currenty-Outery)/Math.Pow(distance,3);
+
             //yvelocity += time*Ay;
             //Currenty += (float)time*(float)yvelocity;
         }
@@ -104,7 +105,7 @@ namespace gravity
             for (int i = 0; i < prevlocX.Count; i++)
             {
                 CircleShape point;
-                point = new CircleShape(1, 1000);
+                point = new CircleShape(1, 30);
                 point.FillColor = Color.Green;
                 point.Origin = new Vector2f(3/2, 3/2);
                 point.Position = new Vector2f(prevlocX[i], prevlocY[i]);

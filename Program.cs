@@ -30,11 +30,17 @@ namespace Physcs
             double windowHeightrangelower = windowheight*0.30;
             double windowHieghtrangehigher = windowheight*0.60;
 
+
+            View view;
+            view = new View(new FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f));
             VideoMode mode = new VideoMode(windowwidth, windowheight);
             RenderWindow window = new RenderWindow(mode, "Main");
             Random random = new Random();
+            view.Zoom(1f);
+            window.SetView(view);
+
             //assigning objects to list
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Body.Add(new gravity.Nbody(random.Next((int)windowWidthrangelower, (int)windowWidthrangehigher), random.Next((int)windowHeightrangelower, (int)windowHieghtrangehigher)));
             }
@@ -44,6 +50,18 @@ namespace Physcs
                 //if close button is pressed close the window
                 window.DispatchEvents();
                 window.Closed += (s, a) => window.Close();
+
+                switch(Keyboard.IsKeyPressed())
+                if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
+                {
+                    view.Zoom(1.05f);
+                    window.SetView(view);
+                }
+                else if (Keyboard.IsKeyPressed(Keyboard.Key.Down))
+                {
+                    view.Zoom(0.95f);
+                    window.SetView(view);
+                }
                 
                 //clears window and sets background as black
                 window.Clear(Color.Black);
