@@ -112,5 +112,10 @@ namespace gravity
                 window.Draw(point);
             }
         }
+        public void centerCamera(RenderWindow window, View view)
+        {
+            view.Center = new Vector2f(Currentx, Currenty);
+            window.SetView(view);
+        }
     }
 }

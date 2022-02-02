@@ -29,6 +29,8 @@ namespace Physcs
             double windowWidthrangehigher = windowwidth*0.60;
             double windowHeightrangelower = windowheight*0.30;
             double windowHieghtrangehigher = windowheight*0.60;
+            bool keyrelease = false;
+            bool pause = false;
 
             View view;
             view = new View(new FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f));
@@ -37,6 +39,7 @@ namespace Physcs
             Random random = new Random();
             view.Zoom(1f);
             window.SetView(view);
+            window.SetKeyRepeatEnabled(false);
 
             //Assigning objects to list
             for (int i = 0; i < 5; i++)
@@ -51,6 +54,9 @@ namespace Physcs
                 //Checks if the X button is pressed to close
                 window.DispatchEvents();
                 window.Closed += (s, a) => window.Close();
+                window.KeyReleased += (s, a) => keyrelease = false;
+
+
                 //Checks different keypresses
                 if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
                 {
@@ -100,49 +106,98 @@ namespace Physcs
                 else if(Keyboard.IsKeyPressed(Keyboard.Key.Right))
                 {
                     //resets pointer on list to 0 as a circular movement
-                    if(currentlockedsystem == Body.Count + 1)
+                    if(currentlockedsystem == Body.Count)
                     {
-                        currentlockedsystem = 0;
+                        //Prevent's multikey press
+                        if (!keyrelease)
+                        {
+                            currentlockedsystem = 0;
+                        }
                     }
-                    else
+                    else    
                     {
-                        //Moves pointer to the right
-                        currentlockedsystem += 1;
+                        //Prevent's multikey press
+                        
+                        if (!keyrelease)
+                        {
+                            //Moves pointer to the right
+                            currentlockedsystem += 1;
+                        }
                     }
+                    keyrelease = true;
                     Console.WriteLine(currentlockedsystem);
                 }
                 else if(Keyboard.IsKeyPressed(Keyboard.Key.Left))
                 {
                     if(currentlockedsystem == 0)
                     {
-                        currentlockedsystem = Body.Count + 1;
+                        if(!keyrelease)
+                        {
+                            currentlockedsystem = Body.Count;
+                        }
                     }
                     else
                     {
-                        currentlockedsystem -= 1;
+                        if(!keyrelease)
+                        {
+                            currentlockedsystem -= 1;
+                        }
                     }
+                    keyrelease = true;
                     Console.WriteLine(currentlockedsystem);
                 }
-                //clears window and sets background as black
-                window.Clear(Color.Black);
-                for (int i = 0; i < Body.Count; i++)
+                else if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
                 {
-                    for (int x = 0; x < Body.Count; x++)
+                    if (!keyrelease)
                     {
-                        if (i != x)
+                        switch(pause)
                         {
-                            Body[i].xmovement(Body[x].Currentx, Body[x].Currenty);
-                            Body[i].ymovement(Body[x].Currentx, Body[x].Currenty);
+                            case true:
+                                pause = false;
+                                break;
+                            case false:
+                                pause = true;
+                                break;
                         }
+                        keyrelease = true;
+
                     }
                 }
 
+                //clears window and sets background as black
+                window.Clear(Color.Black);
+
+                if(!pause)
+                {
+                    for (int i = 0; i < Body.Count; i++)
+                    {
+                        for (int x = 0; x < Body.Count; x++)
+                        {
+                            if (i != x)
+                            {
+                                Body[i].xmovement(Body[x].Currentx, Body[x].Currenty);
+                                Body[i].ymovement(Body[x].Currentx, Body[x].Currenty);
+                            }
+                        }
+                    }
+                }
                 for (int i = 0; i < Body.Count; i++)
                 {
-                    Body[i].LocationCalc();
-                    window.Draw(Body[i].returngrad());
-                    Body[i].trail();
+                    if(!pause)
+                    {
+                        Body[i].LocationCalc();
+                        Body[i].trail();
+                    }
                     Body[i].drawTrail(window);
+                    window.Draw(Body[i].returngrad());
+                    if (i == currentlockedsystem)
+                    {
+                        Body[i].centerCamera(window, view);
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
                 
                 window.Display();
