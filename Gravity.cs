@@ -17,6 +17,7 @@ namespace gravity
         public float Currentx;
         public float Currenty;
         double Ay;
+        float resistivity = 0;
         double Ax;
         float dimensions;
         List<float> prevlocX = new List<float> {};
@@ -72,7 +73,7 @@ namespace gravity
             circle.Position = new Vector2f(Currentx, Currenty);
 
         }
-        public Drawable returngrad()
+        public Drawable returngrad()    
         {
             return circle;
         }
