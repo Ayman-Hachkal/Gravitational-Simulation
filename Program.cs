@@ -27,30 +27,72 @@ namespace Physcs
             bool keyrelease = false;
             bool pause = false;
             bool menu = true;
+            Font menuFont;
+            Color idleColor = new Color(242, 104, 102);
+            Color hoverColor = new Color(237, 43, 40);
+            Color pressedColor = new Color(68, 134, 219);
+            button Start;
+            View view;
+
+            Vector2i mpS;
+            Vector2i mpW;
+            Vector2f mpV;
+            
+            
+
+        public void newmouseposition(RenderWindow window)
+        {
+            this.mpS = Mouse.GetPosition();
+            this.mpS = Mouse.GetPosition(window);
+            this.mpV = window.MapPixelToCoords(Mouse.GetPosition(window));
+        }
+        public void visibleArea(SizeEventArgs eventsize)
+        {
+            view.Size = new Vector2f(eventsize.Width, eventsize.Height);
+            
+        }
+        public void menubuttons()
+        {
+            this.Start = new GUI.button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "start", idleColor, hoverColor, pressedColor);
+            
+        }
         public void window()
         {
-
+            try
+            {
+                menuFont = new Font("Fonts/BebasNeue-Regular.ttf");
+            }
+            catch
+            {
+                Console.WriteLine("1");
+            }
+            finally
+            {
+                
+            }
+            
             double windowWidthrangelower = windowwidth*0.30;
             double windowWidthrangehigher = windowwidth*0.60;
             double windowHeightrangelower = windowheight*0.30;
             double windowHieghtrangehigher = windowheight*0.60;
-            View view;
-            view = new View(new FloatRect(0.0f, 0.0f, 1920.0f, 1080.0f));
+            view = new View(new FloatRect(0.0f, 0.0f, windowwidth, windowheight));
             VideoMode mode = new VideoMode(windowwidth, windowheight);
             RenderWindow window = new RenderWindow(mode, "Main");
             Random random = new Random();
             view.Zoom(1f);
             window.SetView(view);
             window.SetKeyRepeatEnabled(false);
+            
+            menubuttons();
 
-            button button = new button(x, y, width, height, font, text, idleColor, hoverColor, activeColor);
+            //button button = new button(x, y, width, height, font, text, idleColor, hoverColor, activeColor);
 
             //Slider ResistivitySlider = new Slider(x, y, width, height, font, text,  idleColor, hoverColor, activeColor);
 
 
 
             //Assigning objects to list
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 100; i++)
             {
                 Body.Add(new gravity.Nbody(random.Next((int)windowWidthrangelower, (int)windowWidthrangehigher), random.Next((int)windowHeightrangelower, (int)windowHieghtrangehigher)));
             }
@@ -65,11 +107,15 @@ namespace Physcs
                 window.KeyReleased += (s, a) => keyrelease = false;
                 //clears window and sets background as black
                 window.Clear(Color.Black);
+                window.Resized += (s, a) => visibleArea(a);
+                window.SetView(view);
+                newmouseposition(window);
 
                 switch (menu)
                 {
                     case true:
-                        continue;
+                        mainmenu(window);
+                        break;
 
                     case false:         
                         //Checks different keypresses
@@ -220,14 +266,17 @@ namespace Physcs
                 clock.Restart();
                 
             }
+            Console.WriteLine("0");
         }
 
-        public void menuinit(RenderTarget window)
+        public void mainmenu(RenderWindow window)
         {
+            Start.update(mpV);
+            Start.render(window);
 
-            button button = new button(x, y, width, height, font, text, idleColor, hoverColor, activeColor);
-            button.update(window)
         }
+
+    
     }
 }
 

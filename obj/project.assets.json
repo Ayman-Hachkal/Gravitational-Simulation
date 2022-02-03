@@ -444,19 +444,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ayman\\.nuget\\packages\\": {}
+    "C:\\Users\\hachk\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ayman\\Documents\\Physcs\\Physcs.csproj",
+      "projectUniqueName": "C:\\Users\\hachk\\Documents\\conway's game of life\\Physcs\\Physcs.csproj",
       "projectName": "Physcs",
-      "projectPath": "C:\\Users\\Ayman\\Documents\\Physcs\\Physcs.csproj",
-      "packagesPath": "C:\\Users\\Ayman\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ayman\\Documents\\Physcs\\obj\\",
+      "projectPath": "C:\\Users\\hachk\\Documents\\conway's game of life\\Physcs\\Physcs.csproj",
+      "packagesPath": "C:\\Users\\hachk\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hachk\\Documents\\conway's game of life\\Physcs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ayman\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\hachk\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -500,7 +500,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
