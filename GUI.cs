@@ -70,7 +70,7 @@ namespace GUI
         Color hoverColor;
         Color pressedColor;
 
-        public button(float x, float y, float width, float height, Font font, string text, Color idleColor, Color hoverColor, Color pressedColor)
+        public button(float x, float y, float width, float height, Font font, string text, uint charsize, Color idleColor, Color hoverColor, Color pressedColor)
         {
             this.shape = new RectangleShape(new Vector2f(width, height));
             this.shape.Origin = new Vector2f(width/2, height/2);
@@ -83,9 +83,8 @@ namespace GUI
             this.text.Font = this.font;
             this.text.DisplayedString = text;
             this.text.FillColor = Color.White;
-            this.text.Origin = new Vector2f(this.text.Scale.X/2, this.text.Scale.Y/2);
-            this.text.CharacterSize = 15;
-            this.text.Position = new Vector2f(this.shape.Position.X - this.text.GetGlobalBounds().Width/2.0f, this.shape.Position.Y - this.text.GetGlobalBounds().Height/2.0f);
+            this.text.CharacterSize = charsize;
+            this.text.Position = new Vector2f(this.shape.Position.X - this.text.GetGlobalBounds().Width/2.0f, this.shape.Position.Y - this.text.GetGlobalBounds().Height);
 
 
             this.idleColor = idleColor;
@@ -135,6 +134,23 @@ namespace GUI
                 return true;
             }
             else{return false;}
+        }
+    }
+    class Title
+    {
+        private
+        Text text = new Text();
+        public Title(uint x,uint y, string text, Font font)
+        {
+            this.text.DisplayedString = text;
+            this.text.CharacterSize = 40;
+            this.text.FillColor = Color.White;
+            this.text.Font = font;
+            this.text.Position = new Vector2f(x - this.text.GetGlobalBounds().Width/2, y - this.text.GetGlobalBounds().Height/2.0f );
+        }
+        public void render(RenderWindow window)
+        {
+            window.Draw(this.text);
         }
     }
 }
