@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace gravity
 {
-    public class Nbody
+    class Nbody
     {
         private Random random = new Random();
         double Gconst = 6.673889 * Math.Pow(10, -11);
@@ -118,5 +118,9 @@ namespace gravity
             view.Center = new Vector2f(Currentx, Currenty);
             window.SetView(view);
         }
+    }
+    class nBodyBox : Nbody
+    {
+
     }
 }
