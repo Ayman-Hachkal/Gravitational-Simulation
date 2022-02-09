@@ -34,23 +34,14 @@ namespace gravity
             xvelocity = random.Next(-10,10);
             yvelocity = random.Next(-10,10);
             mass = random.Next(10,100);
-            //double fieldStrength = (Gconst*mass*M2);
         }
-
+    
         public void xmovement(float Outerx, float Outery)
         {
             double distancey = Math.Abs(Currenty - Outery); 
             double distancex = Math.Abs(Currentx - Outerx); 
             double distance =  Math.Sqrt(Math.Pow(distancex,2) + Math.Pow(distancey,2));
             Ax += -mass*(Currentx-Outerx)/Math.Pow(distance,2);
-            //if (Currentx >= Outerx +)
-            //{
-            //    Ax = 0;
-            //    xvelocity = 0;
-            //}
-            //xvelocity += time*Ax;
-            //Currentx += (float)time*(float)xvelocity;
-
         }
 
         public void ymovement(float Outerx, float Outery)
@@ -102,7 +93,7 @@ namespace gravity
             }
         }
         public void drawTrail(RenderWindow window)
-        {
+        {   
             for (int i = 0; i < prevlocX.Count; i++)
             {
                 CircleShape point;
