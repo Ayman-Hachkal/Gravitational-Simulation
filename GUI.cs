@@ -69,8 +69,9 @@ namespace GUI
         Color idleColor;
         Color hoverColor;
         Color pressedColor;
+        string BTN_ACTION;
 
-        public button(float x, float y, float width, float height, Font font, string text, uint charsize, Color idleColor, Color hoverColor, Color pressedColor)
+        public button(float x, float y, float width, float height, Font font, string text, uint charsize, Color idleColor, Color hoverColor, Color pressedColor, string BTN_ACTION)
         {
             this.shape = new RectangleShape(new Vector2f(width, height));
             this.shape.Origin = new Vector2f(width/2, height/2);
@@ -90,6 +91,8 @@ namespace GUI
             this.idleColor = idleColor;
             this.hoverColor = hoverColor;
             this.pressedColor = pressedColor;
+
+            this.BTN_ACTION = BTN_ACTION;
 
 
         }
@@ -134,6 +137,21 @@ namespace GUI
                 return true;
             }
             else{return false;}
+        }
+        public void act(RenderWindow window)
+        {
+            switch (this.BTN_ACTION)
+            {
+                case "SCENARIO":
+                    break;
+                case "OPTIONS":
+                    break;
+                case "QUIT":
+                    window.Close();
+                    break;
+                default:
+                    break;
+            }
         }
     }
     class Title

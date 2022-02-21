@@ -29,9 +29,9 @@ namespace Mainmenu
             this.windowwidth = windowwidth;
             this.windowheight = windowheight;
             this.title = new Title(windowwidth/2, windowheight/2 - 100, "N-BODY", this.menuFont);
-            this.Scenario = new button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "Scenario", 20, idleColor, hoverColor, pressedColor);
-            this.Options =  new button(windowwidth/2, windowheight/2 + 50, 100, 30, this.menuFont, "Options", 20, idleColor, hoverColor, pressedColor);
-            this.Close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, this.menuFont, "Close", 20, idleColor, hoverColor, pressedColor);
+            this.Scenario = new button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "Scenario", 20, idleColor, hoverColor, pressedColor, "SCENARIO");
+            this.Options =  new button(windowwidth/2, windowheight/2 + 50, 100, 30, this.menuFont, "Options", 20, idleColor, hoverColor, pressedColor, "OPTIONS");
+            this.Close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, this.menuFont, "Close", 20, idleColor, hoverColor, pressedColor, "QUIT");
             this.menubuttons.Add(this.Scenario);
             this.menubuttons.Add(this.Options);
             this.menubuttons.Add(this.Close);
@@ -46,7 +46,7 @@ namespace Mainmenu
                 this.title.render(window);
                 if (this.menubuttons[i].isPressed())
                 {
-                    
+                    this.menubuttons[i].act(window);
                 }
             }
         }
