@@ -3,9 +3,8 @@ using SFML.Window;
 using SFML.System;
 using SFML.Graphics;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using gravity;
 using GUI;
+using States;
 
 namespace Mainmenu
 {
@@ -18,37 +17,85 @@ namespace Mainmenu
         Color pressedColor = new Color(68, 134, 219);
         List<button> menubuttons = new List<button>();
         Title title;
-        button Scenario;
-        button Close;
-        button Options;
         uint windowheight;
         uint windowwidth;
+        state.buttonAction currentLayout = state.buttonAction.menu;
 
         public void initMenu(uint windowwidth, uint windowheight, RenderWindow window)
         {
             this.windowwidth = windowwidth;
             this.windowheight = windowheight;
             this.title = new Title(windowwidth/2, windowheight/2 - 100, "N-BODY", this.menuFont);
-            this.Scenario = new button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "Scenario", 20, idleColor, hoverColor, pressedColor, "SCENARIO");
-            this.Options =  new button(windowwidth/2, windowheight/2 + 50, 100, 30, this.menuFont, "Options", 20, idleColor, hoverColor, pressedColor, "OPTIONS");
-            this.Close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, this.menuFont, "Close", 20, idleColor, hoverColor, pressedColor, "QUIT");
-            this.menubuttons.Add(this.Scenario);
-            this.menubuttons.Add(this.Options);
-            this.menubuttons.Add(this.Close);
+            button scenario = new button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "Scenario", 20, idleColor, hoverColor, pressedColor, "SCENARIO");
+            button options =  new button(windowwidth/2, windowheight/2 + 50, 100, 30, this.menuFont, "Options", 20, idleColor, hoverColor, pressedColor, "OPTIONS");
+            button close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, this.menuFont, "Close", 20, idleColor, hoverColor, pressedColor, "QUIT");
+            this.menubuttons.Add(scenario);
+            this.menubuttons.Add(options);
+            this.menubuttons.Add(close);
             
         }
         public void mainmenu(RenderWindow window, Vector2f mpV)
         {
-            for (int i = 0; i < this.menubuttons.Count; i++)
-            {
-                this.menubuttons[i].update(mpV);
-                this.menubuttons[i].render(window);
-                this.title.render(window);
-                if (this.menubuttons[i].isPressed())
+            window.Clear();
+                for (int i = 0; i < this.menubuttons.Count; i++)
                 {
-                    this.menubuttons[i].act(window);
+                    this.menubuttons[i].update(mpV);
+                    this.menubuttons[i].render(window);
+                    if (currentLayout == state.buttonAction.menu)
+                    {
+                        this.title.render(window);
+                    }
+                    if (this.menubuttons[i].isPressed())
+                    {
+                        state.buttonAction action = this.menubuttons[i].act();
+                        switch (action)
+                        {
+                            case state.buttonAction.scenario:
+                                initScenario();
+                                currentLayout = state.buttonAction.scenario;
+                                break;
+                            case state.buttonAction.options:
+                                initOptions();
+                                currentLayout = state.buttonAction.options;
+                                break;
+                            case state.buttonAction.close:
+                                window.Close();
+                                break;
+                            case state.buttonAction.menu:
+                                initMenu();
+                                currentLayout = state.buttonAction.menu;
+                                break;
+                            default:
+                                break;
+
+                        }
+                    }
                 }
-            }
+        }
+        public void initScenario()
+        {
+            this.menubuttons.Clear();
+            button scenario = new button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "Scenario", 20, idleColor, hoverColor, pressedColor, "SCENARIO");
+            button options =  new button(windowwidth/2, windowheight/2 + 50, 100, 30, this.menuFont, "Options", 20, idleColor, hoverColor, pressedColor, "OPTIONS");
+            button close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, this.menuFont, "Close", 20, idleColor, hoverColor, pressedColor, "QUIT");
+            this.menubuttons.Add(scenario);
+            this.menubuttons.Add(options);
+            this.menubuttons.Add(close);
+            
+        }
+        public void initOptions()
+        {  
+            this.menubuttons.Clear();
+        }
+        public void initMenu()
+        {
+            this.menubuttons.Clear();
+            button scenario = new button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "Scenario", 20, idleColor, hoverColor, pressedColor, "SCENARIO");
+            button options =  new button(windowwidth/2, windowheight/2 + 50, 100, 30, this.menuFont, "Options", 20, idleColor, hoverColor, pressedColor, "OPTIONS");
+            button close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, this.menuFont, "Close", 20, idleColor, hoverColor, pressedColor, "QUIT");
+            this.menubuttons.Add(scenario);
+            this.menubuttons.Add(options);
+            this.menubuttons.Add(close);
         }
     }
 
