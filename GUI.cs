@@ -1,12 +1,12 @@
 using SFML.Window;
 using SFML.Graphics;
 using SFML.System;
-
+using States;
+using Mainmenu;
 
 namespace GUI
 {
     enum button_states{BTN_IDLE = 0, BTN_HOVER, BTN_PRESSED};
-    
     class Slider
     {
         private
@@ -61,6 +61,7 @@ namespace GUI
     {
         private
         
+        state guiState = new state();
         button_states buttonState;
         RectangleShape shape;
         Font font;
@@ -138,19 +139,18 @@ namespace GUI
             }
             else{return false;}
         }
-        public void act(RenderWindow window)
+        public state.buttonAction act()
         {
             switch (this.BTN_ACTION)
             {
                 case "SCENARIO":
-                    break;
+                    return state.buttonAction.scenario;
                 case "OPTIONS":
-                    break;
+                    return state.buttonAction.options;
                 case "QUIT":
-                    window.Close();
-                    break;
+                    return state.buttonAction.close;
                 default:
-                    break;
+                    return state.buttonAction.noact ;
             }
         }
     }
