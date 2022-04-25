@@ -1,3 +1,4 @@
+using System;
 using SFML.Window;
 using SFML.Graphics;
 using SFML.System;
@@ -169,6 +170,37 @@ namespace GUI
         public void render(RenderWindow window)
         {
             window.Draw(this.text);
+        }
+    }
+    class selection
+    {
+        RectangleShape shape;
+        Font font;
+        Text text = new Text();
+        Texture texture;
+        public selection(float x, float y, float width, float height, Font font, string text, uint charsize,string image)
+        {
+            try
+            {
+                texture = new Texture(image);
+            }
+            catch
+            {
+                Console.WriteLine("Can't load texture/s");
+                System.Environment.Exit(3);
+            }
+            this.shape = new RectangleShape(new Vector2f(width, height));
+            this.shape.Origin = new Vector2f(width/2, height/2);
+            this.shape.Position = new Vector2f(x,y);
+            this.shape.FillColor = Color.White;
+            
+            this.font = font;
+            this.text.Font = this.font;
+            this.text.DisplayedString = text;
+            this.text.FillColor = Color.White;
+            this.text.CharacterSize = charsize;
+            this.text.Position = new Vector2f(this.shape.Position.X - this.text.GetGlobalBounds().Width/2.0f, this.shape.Position.Y - this.text.GetGlobalBounds().Height);
+
         }
     }
 }

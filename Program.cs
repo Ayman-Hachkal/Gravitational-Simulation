@@ -25,11 +25,13 @@ namespace Physcs
             uint windowwidth = 1920;
             uint windowheight = 1080;
             List<gravity.Nbody> Body = new List<gravity.Nbody>();
-            bool pause = false;
+            bool pause = true;
             bool menu = true;
             View view;
             state state = new state();
             layout Menu = new layout();
+            Font normFont = new Font("Fonts/BebasNeue-Regular.ttf");
+
 
         public void visibleArea(SizeEventArgs eventsize)
         {
@@ -57,6 +59,11 @@ namespace Physcs
             {
                 Body.Add(new gravity.Nbody(random.Next((int)windowWidthrangelower, (int)windowWidthrangehigher), random.Next((int)windowHeightrangelower, (int)windowHieghtrangehigher)));
             }
+            Text currentlockedsystemtext = new Text();
+            currentlockedsystemtext.CharacterSize = 20;
+            currentlockedsystemtext.FillColor = Color.White;
+            currentlockedsystemtext.Font = normFont;
+            currentlockedsystemtext.Position = new Vector2f(100, windowheight - 100);
             //Gets length of object list body and adds one to set as NULL
             int currentlockedsystem = Body.Count + 1;
             //Main loop for window 
@@ -74,7 +81,7 @@ namespace Physcs
                 switch (menu)
                 {
                     case true:
-                        Menu.mainmenu(window, state.getMpv(window));
+                        menu = Menu.mainmenu(window, state.getMpv(window));
                         break;
 
                     case false:         
@@ -184,8 +191,6 @@ namespace Physcs
 
                             }
                         }
-
-
                         if(!pause)
                         {
                             for (int i = 0; i < Body.Count; i++)
@@ -194,8 +199,8 @@ namespace Physcs
                                 {
                                     if (i != x)
                                     {
-                                        Body[i].xmovement(Body[x].Currentx, Body[x].Currenty);
-                                        Body[i].ymovement(Body[x].Currentx, Body[x].Currenty);
+                                        Body[i].xmovement(Body[x].Currentx, Body[x].Currenty, Body[x].mass);
+                                        //Body[i].ymovement(Body[x].Currentx, Body[x].Currenty, Body[x].mass);
                                     }
                                 }
                             }
@@ -205,19 +210,23 @@ namespace Physcs
                             if(!pause)
                             {
                                 Body[i].LocationCalc();
-                                Body[i].trail();
+                                //Body[i].trail();
                             }
-                            Body[i].drawTrail(window);
+                            //Body[i].drawTrail(window);
                             window.Draw(Body[i].returngrad());
                             if (i == currentlockedsystem)
                             {
                                 Body[i].centerCamera(window, view);
+                                Console.WriteLine(Body[i].getvelocity());
                             }
                             else
                             {
                                 continue;
                             }
                         }
+                        
+                        currentlockedsystemtext.DisplayedString = $"Locked Body {currentlockedsystem} ";
+                        window.Draw(currentlockedsystemtext);
                         break;
                 }
                 window.Display();
@@ -226,7 +235,7 @@ namespace Physcs
                 clock.Restart();
                 
             }
-            Console.WriteLine("0");
+            Console.WriteLine("0");     
         }
 
     }

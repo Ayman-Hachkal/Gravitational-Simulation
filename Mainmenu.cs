@@ -20,6 +20,7 @@ namespace Mainmenu
         uint windowheight;
         uint windowwidth;
         state.buttonAction currentLayout = state.buttonAction.menu;
+        bool menu = true;
 
         public void initMenu(uint windowwidth, uint windowheight, RenderWindow window)
         {
@@ -34,7 +35,7 @@ namespace Mainmenu
             this.menubuttons.Add(close);
             
         }
-        public void mainmenu(RenderWindow window, Vector2f mpV)
+        public bool mainmenu(RenderWindow window, Vector2f mpV)
         {
             window.Clear();
                 for (int i = 0; i < this.menubuttons.Count; i++)
@@ -53,6 +54,7 @@ namespace Mainmenu
                             case state.buttonAction.scenario:
                                 initScenario();
                                 currentLayout = state.buttonAction.scenario;
+                                menu = false;
                                 break;
                             case state.buttonAction.options:
                                 initOptions();
@@ -71,6 +73,7 @@ namespace Mainmenu
                         }
                     }
                 }
+                return menu;
         }
         public void initScenario()
         {
@@ -86,6 +89,7 @@ namespace Mainmenu
         public void initOptions()
         {  
             this.menubuttons.Clear();
+                
         }
         public void initMenu()
         {
