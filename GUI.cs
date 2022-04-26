@@ -64,35 +64,18 @@ namespace GUI
         
         state guiState = new state();
         button_states buttonState;
-        RectangleShape shape;
+        Sprite Button;
         Font font;
         Text text = new Text();
-        
-        Color idleColor;
-        Color hoverColor;
-        Color pressedColor;
         string BTN_ACTION;
 
-        public button(float x, float y, float width, float height, Font font, string text, uint charsize, Color idleColor, Color hoverColor, Color pressedColor, string BTN_ACTION)
+        public button(float x, float y, float width, float height, string BTN_ACTION, string image)
         {
-            this.shape = new RectangleShape(new Vector2f(width, height));
-            this.shape.Origin = new Vector2f(width/2, height/2);
-            this.shape.Position = new Vector2f(x,y);
-            this.shape.FillColor = Color.White;
+            Texture texture = new Texture(image);
+            this.Button = new Sprite(texture);
+            this.Button.Position = new Vector2f(x, y);
 
             this.buttonState = button_states.BTN_IDLE;
-
-            this.font = font;
-            this.text.Font = this.font;
-            this.text.DisplayedString = text;
-            this.text.FillColor = Color.White;
-            this.text.CharacterSize = charsize;
-            this.text.Position = new Vector2f(this.shape.Position.X - this.text.GetGlobalBounds().Width/2.0f, this.shape.Position.Y - this.text.GetGlobalBounds().Height);
-
-
-            this.idleColor = idleColor;
-            this.hoverColor = hoverColor;
-            this.pressedColor = pressedColor;
 
             this.BTN_ACTION = BTN_ACTION;
 
@@ -101,7 +84,7 @@ namespace GUI
         public void update(Vector2f mousepos)
         {
             this.buttonState = button_states.BTN_IDLE;
-            if(this.shape.GetGlobalBounds().Contains((float)mousepos.X, (float)mousepos.Y))
+            if(this.Button.GetGlobalBounds().Contains((float)mousepos.X, (float)mousepos.Y))
             {
                 this.buttonState = button_states.BTN_HOVER;
                 if(Mouse.IsButtonPressed(Mouse.Button.Left))
@@ -109,20 +92,6 @@ namespace GUI
                     this.buttonState = button_states.BTN_PRESSED;
                 }
             }
-            switch (buttonState)
-            {
-                case button_states.BTN_IDLE:
-                    this.shape.FillColor = this.idleColor;
-                    break;
-                case button_states.BTN_HOVER:
-                    this.shape.FillColor = this.hoverColor;
-                    break;
-                case button_states.BTN_PRESSED:
-                    this.shape.FillColor = this.pressedColor;
-                    break;
-                default:
-                    this.shape.FillColor = Color.Red;
-                    break;
             }
         }
         public void render(RenderWindow window)

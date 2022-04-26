@@ -78,7 +78,7 @@ namespace Mainmenu
         public void initScenario()
         {
             this.menubuttons.Clear();
-            button scenario = new button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "Scenario", 20, idleColor, hoverColor, pressedColor, "SCENARIO");
+            button scenario = new button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "Scenario", 20, idleColor, hoverColor, pressedColor, "CREATE");
             button options =  new button(windowwidth/2, windowheight/2 + 50, 100, 30, this.menuFont, "Options", 20, idleColor, hoverColor, pressedColor, "OPTIONS");
             button close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, this.menuFont, "Close", 20, idleColor, hoverColor, pressedColor, "QUIT");
             this.menubuttons.Add(scenario);
