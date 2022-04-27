@@ -65,8 +65,6 @@ namespace GUI
         state guiState = new state();
         button_states buttonState;
         Sprite Button;
-        Font font;
-        Text text = new Text();
         string BTN_ACTION;
 
         public button(float x, float y, float width, float height, string BTN_ACTION, string image)
@@ -92,12 +90,11 @@ namespace GUI
                     this.buttonState = button_states.BTN_PRESSED;
                 }
             }
-            }
+            
         }
         public void render(RenderWindow window)
         {
-            window.Draw(this.shape);
-            window.Draw(this.text);
+            window.Draw(this.Button);
             //Draw shapes
         }
 
