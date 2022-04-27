@@ -2,12 +2,9 @@
 using SFML.Window;
 using SFML.System;
 using SFML.Graphics;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using gravity;
-using GUI;
 using States;
 using Mainmenu;
+
 
 namespace Physcs
 {
@@ -24,13 +21,10 @@ namespace Physcs
         private
             uint windowwidth = 1920;
             uint windowheight = 1080;
-            List<gravity.Nbody> Body = new List<gravity.Nbody>();
-            bool pause = true;
-            bool menu = true;
             View view;
             state state = new state();
             layout Menu = new layout();
-            Font normFont = new Font("Fonts/BebasNeue-Regular.ttf");
+            state.menustates currentstate = state.menustates.menu;
 
 
         public void visibleArea(SizeEventArgs eventsize)
@@ -54,18 +48,6 @@ namespace Physcs
             window.SetView(view);
             
             Menu.initMenu(windowwidth, windowheight, window);
-            //Assigning objects to list
-            for (int i = 0; i < 100; i++)
-            {
-                Body.Add(new gravity.Nbody(random.Next((int)windowWidthrangelower, (int)windowWidthrangehigher), random.Next((int)windowHeightrangelower, (int)windowHieghtrangehigher)));
-            }
-            Text currentlockedsystemtext = new Text();
-            currentlockedsystemtext.CharacterSize = 20;
-            currentlockedsystemtext.FillColor = Color.White;
-            currentlockedsystemtext.Font = normFont;
-            currentlockedsystemtext.Position = new Vector2f(100, windowheight - 100);
-            //Gets length of object list body and adds one to set as NULL
-            int currentlockedsystem = Body.Count + 1;
             //Main loop for window 
             while (window.IsOpen)
             {
@@ -74,17 +56,17 @@ namespace Physcs
                 window.Closed += (s, a) => window.Close();
                 window.KeyReleased += (s, a) => state.setKeyRelease(false);
                 //clears window and sets background as black
-                window.Clear(Color.Black);
+                window.Clear(Color.White);
                 window.Resized += (s, a) => visibleArea(a);
                 window.SetView(view);
 
-                switch (menu)
+                switch (this.currentstate)
                 {
-                    case true:
-                        menu = Menu.mainmenu(window, state.getMpv(window));
+                    case state.menustates.menu:
+                        this.currentstate = Menu.mainmenu(window, state.getMpv(window));
                         break;
 
-                    case false:         
+                    case state.menustates.create:         
                         //Checks different keypresses
                         if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
                         {
@@ -130,109 +112,10 @@ namespace Physcs
                             view.Center = dim;
                             window.SetView(view);
                         }
-                        //Picks which body camera locks onto
-                        else if(Keyboard.IsKeyPressed(Keyboard.Key.Right))
-                        {
-                            //resets pointer on list to 0 as a circular movement
-                            if(currentlockedsystem == Body.Count)
-                            {
-                                //Prevent's multikey press
-                                if (!state.getKeyRelease())
-                                {
-                                    currentlockedsystem = 0;
-                                }
-                            }
-                            else    
-                            {
-                                //Prevent's multikey press
-                                
-                                if (!state.getKeyRelease())
-                                {
-                                    //Moves pointer to the right
-                                    currentlockedsystem += 1;
-                                }
-                            }
-                            state.setKeyRelease(true);
-                            Console.WriteLine(currentlockedsystem);
-                        }
-                        else if(Keyboard.IsKeyPressed(Keyboard.Key.Left))
-                        {
-                            if(currentlockedsystem == 0)
-                            {
-                                if(!state.getKeyRelease())
-                                {
-                                    currentlockedsystem = Body.Count;
-                                }
-                            }
-                            else
-                            {
-                                if(!state.getKeyRelease())
-                                {
-                                    currentlockedsystem -= 1;
-                                }
-                            }
-                            state.setKeyRelease(true);
-                            Console.WriteLine(currentlockedsystem);
-                        }
-                        else if (Keyboard.IsKeyPressed(Keyboard.Key.Space))
-                        {
-                            if (!state.getKeyRelease())
-                            {
-                                switch(pause)
-                                {
-                                    case true:
-                                        pause = false;
-                                        break;
-                                    case false:
-                                        pause = true;
-                                        break;
-                                }
-                                state.setKeyRelease(true);
-
-                            }
-                        }
-                        if(!pause)
-                        {
-                            for (int i = 0; i < Body.Count; i++)
-                            {
-                                for (int x = 0; x < Body.Count; x++)
-                                {
-                                    if (i != x)
-                                    {
-                                        Body[i].xmovement(Body[x].Currentx, Body[x].Currenty, Body[x].mass);
-                                        //Body[i].ymovement(Body[x].Currentx, Body[x].Currenty, Body[x].mass);
-                                    }
-                                }
-                            }
-                        }
-                        for (int i = 0; i < Body.Count; i++)
-                        {
-                            if(!pause)
-                            {
-                                Body[i].LocationCalc();
-                                //Body[i].trail();
-                            }
-                            //Body[i].drawTrail(window);
-                            window.Draw(Body[i].returngrad());
-                            if (i == currentlockedsystem)
-                            {
-                                Body[i].centerCamera(window, view);
-                                Console.WriteLine(Body[i].getvelocity());
-                            }
-                            else
-                            {
-                                continue;
-                            }
-                        }
-                        
-                        currentlockedsystemtext.DisplayedString = $"Locked Body {currentlockedsystem} ";
-                        window.Draw(currentlockedsystemtext);
                         break;
                 }
                 window.Display();
                 window.SetFramerateLimit(60);
-                Clock clock = new Clock();
-                clock.Restart();
                 
             }
             Console.WriteLine("0");     

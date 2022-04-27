@@ -14,7 +14,7 @@ namespace States
         Vector2i mpS;
         Vector2i mpW;
         Vector2f mpV;
-        public enum buttonAction {noact = 0, create, options, close, menu}
+        public enum menustates {noact = 0, create, options, close, menu}
         public Vector2i getMps(RenderWindow window)
         {
             this.mpS = Mouse.GetPosition();
