@@ -10,11 +10,6 @@ namespace Mainmenu
 {
     class layout
     {
-        
-        Font menuFont = new Font("Fonts/BebasNeue-Regular.ttf");
-        Color idleColor = new Color(242, 104, 102);
-        Color hoverColor = new Color(237, 43, 40);
-        Color pressedColor = new Color(68, 134, 219);
         List<button> menubuttons = new List<button>();
         Title title;
         uint windowheight;
@@ -26,11 +21,11 @@ namespace Mainmenu
         {
             this.windowwidth = windowwidth;
             this.windowheight = windowheight;
-            this.title = new Title(windowwidth/2, windowheight/2 - 100, "N-BODY", this.menuFont);
-            button scenario = new button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "Scenario", 20, idleColor, hoverColor, pressedColor, "SCENARIO");
-            button options =  new button(windowwidth/2, windowheight/2 + 50, 100, 30, this.menuFont, "Options", 20, idleColor, hoverColor, pressedColor, "OPTIONS");
-            button close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, this.menuFont, "Close", 20, idleColor, hoverColor, pressedColor, "QUIT");
-            this.menubuttons.Add(scenario);
+            button title = new button(windowwidth/2, windowheight/2 - 100, 100,30, "Title", "Sprites/Title");
+            button create = new button(windowwidth/2, windowheight/2, 100, 30, "Create", "Sprites/Create.png");
+            button options = new button(windowwidth/2, windowheight/2 + 50, 100, 30, "Options", "Sprites/Options.png");
+            button close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, "Close", "Sprites/Close.png");
+            this.menubuttons.Add(create);
             this.menubuttons.Add(options);
             this.menubuttons.Add(close);
             
@@ -51,9 +46,9 @@ namespace Mainmenu
                         state.buttonAction action = this.menubuttons[i].act();
                         switch (action)
                         {
-                            case state.buttonAction.scenario:
-                                initScenario();
-                                currentLayout = state.buttonAction.scenario;
+                            case state.buttonAction.create:
+                                    
+                                currentLayout = state.buttonAction.create;
                                 menu = false;
                                 break;
                             case state.buttonAction.options:
@@ -75,17 +70,6 @@ namespace Mainmenu
                 }
                 return menu;
         }
-        public void initScenario()
-        {
-            this.menubuttons.Clear();
-            button scenario = new button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "Scenario", 20, idleColor, hoverColor, pressedColor, "CREATE");
-            button options =  new button(windowwidth/2, windowheight/2 + 50, 100, 30, this.menuFont, "Options", 20, idleColor, hoverColor, pressedColor, "OPTIONS");
-            button close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, this.menuFont, "Close", 20, idleColor, hoverColor, pressedColor, "QUIT");
-            this.menubuttons.Add(scenario);
-            this.menubuttons.Add(options);
-            this.menubuttons.Add(close);
-            
-        }
         public void initOptions()
         {  
             this.menubuttons.Clear();
@@ -94,13 +78,18 @@ namespace Mainmenu
         public void initMenu()
         {
             this.menubuttons.Clear();
-            button scenario = new button(windowwidth/2, windowheight/2, 100, 30, this.menuFont, "Scenario", 20, idleColor, hoverColor, pressedColor, "SCENARIO");
-            button options =  new button(windowwidth/2, windowheight/2 + 50, 100, 30, this.menuFont, "Options", 20, idleColor, hoverColor, pressedColor, "OPTIONS");
-            button close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, this.menuFont, "Close", 20, idleColor, hoverColor, pressedColor, "QUIT");
-            this.menubuttons.Add(scenario);
+            button create = new button(windowwidth/2, windowheight/2, 100, 30, "Create", "Sprites/Create.png");
+            button options = new button(windowwidth/2, windowheight/2 + 50, 100, 30, "Options", "Sprites/Options.png");
+            button close = new button(windowwidth/2, windowheight/2 + 100, 100, 30, "Close", "Sprites/Close.png");
+            this.menubuttons.Add(create);
             this.menubuttons.Add(options);
             this.menubuttons.Add(close);
         }
+    }
+
+    class creation
+    {
+
     }
 
     
