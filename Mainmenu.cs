@@ -44,9 +44,9 @@ namespace Mainmenu
                             case state.menustates.create:
                                     
                                 currentLayout = state.menustates.create;
+                                window.SetView(new View(new Vector2f(0,0)));
                                 break;
                             case state.menustates.options:
-                                initOptions();
                                 currentLayout = state.menustates.options;
                                 break;
                             case state.menustates.close:
@@ -59,18 +59,8 @@ namespace Mainmenu
                     }
                 }
                 return currentLayout;
+            }
         }
-        public void initOptions()
-        {  
-            this.menubuttons.Clear();
-                
-        }
-    }
-
-    class creation
-    {
-
-    }
 
     
 }

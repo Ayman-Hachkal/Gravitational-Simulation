@@ -4,6 +4,7 @@ using SFML.System;
 using SFML.Graphics;
 using States;
 using Mainmenu;
+using creation;
 
 
 namespace Physcs
@@ -25,11 +26,12 @@ namespace Physcs
             state state = new state();
             layout Menu = new layout();
             state.menustates currentstate = state.menustates.menu;
+            Clock clock = new Clock();
 
 
         public void visibleArea(SizeEventArgs eventsize)
         {
-            //view.Size = new Vector2f(eventsize.Width, eventsize.Height);
+            view.Size = new Vector2f(eventsize.Width, eventsize.Height);
             
         }
         public void window()
@@ -38,6 +40,7 @@ namespace Physcs
             double windowWidthrangehigher = windowwidth*0.60;
             double windowHeightrangelower = windowheight*0.30;
             double windowHieghtrangehigher = windowheight*0.60;
+            
 
             view = new View(new FloatRect(0.0f, 0.0f, windowwidth, windowheight));
             VideoMode mode = new VideoMode(windowwidth, windowheight);
@@ -48,6 +51,7 @@ namespace Physcs
             window.SetView(view);
             
             Menu.initMenu(windowwidth, windowheight, window);
+            gridlayout createwindow = new gridlayout(window, view);
             //Main loop for window 
             while (window.IsOpen)
             {
@@ -56,8 +60,8 @@ namespace Physcs
                 window.Closed += (s, a) => window.Close();
                 window.KeyReleased += (s, a) => state.setKeyRelease(false);
                 //clears window and sets background as black
-                window.Clear(Color.White);
                 window.Resized += (s, a) => visibleArea(a);
+                window.Clear(Color.Blue);
                 window.SetView(view);
 
                 switch (this.currentstate)
@@ -66,13 +70,14 @@ namespace Physcs
                         this.currentstate = Menu.mainmenu(window, state.getMpv(window));
                         break;
 
-                    case state.menustates.create:         
+                    case state.menustates.create:      
+                        createwindow.updateGrid(window, view);   
                         //Checks different keypresses
                         if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
                         {
                             //Zooms in if up arrow is pressed
                             view.Zoom(1.05f);
-                            window.SetView(view);
+                            window.SetView(window.DefaultView);
                         }
                         else if (Keyboard.IsKeyPressed(Keyboard.Key.Down))
                         {
@@ -83,40 +88,34 @@ namespace Physcs
                         else if (Keyboard.IsKeyPressed(Keyboard.Key.W))
                         {
                             //Camera moves upwards if W is pressed
-                            Vector2f dim = view.Center;
-                            dim.Y = dim.Y - 20;
-                            view.Center = dim;
-                            window.SetView(view);
+                            view.Move(new Vector2f(0,-5));
                         }
                         else if (Keyboard.IsKeyPressed(Keyboard.Key.S))
                         {
                             //Camera moves downwards if S is pressed
-                            Vector2f dim = view.Center;
-                            dim.Y = dim.Y + 20;
-                            view.Center = dim;
-                            window.SetView(view);
+                            view.Move(new Vector2f(0,5));
                         }
                         else if (Keyboard.IsKeyPressed(Keyboard.Key.A))
                         {
                             //Camera moves left if A is pressed
-                            Vector2f dim = view.Center;
-                            dim.X = dim.X - 20;
-                            view.Center = dim;
-                            window.SetView(view);
+                            view.Move(new Vector2f(-5,0));
                         }
                         else if (Keyboard.IsKeyPressed(Keyboard.Key.D))
                         {
                             //Camera moves right is D is pressed
-                            Vector2f dim = view.Center;
-                            dim.X = dim.X + 20;
-                            view.Center = dim;
-                            window.SetView(view);
+                            view.Move(new Vector2f(5,0));
+                        
+                        }
+                        else if(Keyboard.IsKeyPressed(Keyboard.Key.Escape))
+                        {
+                            window.Close();
                         }
                         break;
                 }
-                window.Display();
-                window.SetFramerateLimit(60);
-                
+                window.Display();   
+                window.SetFramerateLimit(240);
+                float time = clock.ElapsedTime.AsSeconds();
+                clock.Restart();
             }
             Console.WriteLine("0");     
         }
