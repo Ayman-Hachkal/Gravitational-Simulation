@@ -61,7 +61,7 @@ namespace Physcs
                 window.KeyReleased += (s, a) => state.setKeyRelease(false);
                 //clears window and sets background as black
                 window.Resized += (s, a) => visibleArea(a);
-                window.Clear(Color.Blue);
+                window.Clear(new Color(156, 156, 156));
                 window.SetView(view);
 
                 switch (this.currentstate)

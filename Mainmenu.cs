@@ -44,7 +44,7 @@ namespace Mainmenu
                             case state.menustates.create:
                                     
                                 currentLayout = state.menustates.create;
-                                window.SetView(new View(new Vector2f(0,0)));
+                                //window.SetView(new View(new Vector2f(0,0)));
                                 break;
                             case state.menustates.options:
                                 currentLayout = state.menustates.options;
