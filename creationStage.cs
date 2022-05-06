@@ -8,10 +8,13 @@ using Mainmenu;
 
 namespace creation
 {
-    class gridlayout
+    class create
     {
         RenderWindow window;
         View view;
+    }
+    class gridlayout : create
+    {
 
         public gridlayout(RenderWindow Window, View View)
         {
@@ -84,5 +87,9 @@ namespace creation
             }
             Console.WriteLine(view.Center.X);
         }
+    }
+    class Movement
+    {
+
     }
 }
