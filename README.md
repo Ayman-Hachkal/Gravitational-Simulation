@@ -1,1 +1,1 @@
-A-Level project implementing Physis with Computer Science
+A-Level project implementing Physics with Computer Science
